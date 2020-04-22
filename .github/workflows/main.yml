@@ -21,10 +21,12 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
 
     # Runs a single command using the runners shell
     - name: Run Fppt-Ig
-      run: docker run -v `pwd`:/root/fpptIg/studentManager -v `pwd`/output:/root/fpptigOutput --env FPPT_IG_REPO_PATH=/root/fpptIg/studentManager --env FPPT_IG_TASK_PREFIX="SM" mario94/fppt-ig:1.0
+      run: docker run -v `pwd`:/root/fpptIg/studentManager -v `pwd`/output:/root/fpptigOutput --env FPPT_IG_REPO_PATH=/root/fpptIg/studentManager --env FPPT_IG_TASK_PREFIX="SM" mario94/fppt-ig:1.0-SNAPSHOT
 
     - name: Upload Json result
       uses: actions/upload-artifact@v1
